@@ -59,9 +59,14 @@ flutter:
   assets:
     - assets/images/cole.jpg
     - assets/images/eminiem.jpg
+    - assets/images/edshrean.jpg
+    - assets/images/metal.jpg
+    - assets/images/classical.jpg
     - assets/images/lilbaby.png
     - assets/images/homebg.png
     - assets/images/logo.png
+    - assets/images/Kendrick.png
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
