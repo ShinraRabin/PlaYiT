@@ -34,9 +34,9 @@ class _SignupScreenState extends State<SignupScreen> {
               iconSize: 30,
             ),
           ],
-          backgroundColor: Color(0xff00525d),
+          backgroundColor: Color.fromARGB(255, 1, 98, 143),
         ),
-        backgroundColor: Color(0xff00525d),
+        backgroundColor:Color.fromARGB(255, 1, 98, 143),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(8.0),
@@ -172,7 +172,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                Color.fromARGB(255, 2, 105, 119),
+                                 Color.fromARGB(255, 79, 162, 201),
                                 Color.fromARGB(255, 0, 23, 26),
                               ],
                               begin: Alignment

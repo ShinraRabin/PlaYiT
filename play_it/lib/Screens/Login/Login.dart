@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play_it/Screens/Login/Signup.dart';
+import 'package:play_it/Screens/layouts/layouts.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,11 +11,11 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
+  // final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  // final TextEditingController _confirmPasswordController =
+      // TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +34,9 @@ class _LoginScreenState extends State<LoginScreen> {
               iconSize: 30,
             ),
           ],
-          backgroundColor: Color(0xff00525d),
+          backgroundColor: Color.fromARGB(255, 1, 98, 143),
         ),
-        backgroundColor: Color(0xff00525d),
+        backgroundColor: Color.fromARGB(255, 1, 98, 143),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(8.0),
@@ -99,8 +100,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                         child: TextFormField(
-                          controller: _confirmPasswordController,
-                          validator: (value) {
+                          controller: _passwordController,
+                          validator: ( String? value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter your Password';
                             }
@@ -124,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                Color.fromARGB(255, 2, 105, 119),
+                                 Color.fromARGB(255, 79, 162, 201),
                                 Color.fromARGB(255, 0, 23, 26),
                               ],
                               begin: Alignment
@@ -138,13 +139,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LoginScreen()));
+                                      builder: (context) => Layout()));
                             },
                             label: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
-                                  'SignUp',
+                                  'SignIn',
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 Icon(
@@ -165,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 260,
                 ),
                 Container(
                   width: 300, // Adjust the width as per your requirement
@@ -190,7 +191,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               width:
                                   50.0), // Add some space between the icon and text
                           Text(
-                            "Signup with Google",
+                            "SignIn with Google",
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
@@ -210,10 +211,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("Don't have a Accoynt",style: TextStyle(color: Colors.white),),
+                        Text("Don't have a Account",style: TextStyle(color: Colors.white),),
                         ElevatedButton(onPressed: (){
                           Navigator.push(
-                         context, MaterialPageRoute(builder: (context) =>LoginScreen()));
+                         context, MaterialPageRoute(builder: (context) =>SignupScreen()));
                         }, 
                         child: Text("Sign Up", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                         style: ElevatedButton.styleFrom(
