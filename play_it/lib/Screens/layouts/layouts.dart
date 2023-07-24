@@ -59,8 +59,8 @@ class _LayoutState extends State<Layout> {
             unselectedItemColor: Colors.white.withOpacity(0.6),
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-              BottomNavigationBarItem(icon: Icon(Icons.bookmark_outlined), label: 'Favorites'),
-              BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+              BottomNavigationBarItem(icon: Icon(Icons.bookmarks_outlined), label: 'Favorites'),
+              BottomNavigationBarItem(icon: Icon(Icons.settings_outlined), label: 'Settings'),
             ],
             currentIndex: _selectedIndex,
             onTap: _onItemTapped,

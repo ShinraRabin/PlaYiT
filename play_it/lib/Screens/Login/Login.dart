@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play_it/Screens/Login/Signup.dart';
+import 'package:play_it/Screens/homePage.dart';
 import 'package:play_it/Screens/layouts/layouts.dart';
 import 'package:play_it/Screens/subscription/subscription.dart';
 
@@ -150,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Subscription()));
+                                      builder: (context) => HomePage()));
                     // } else {
                     //   ScaffoldMessenger.of(context).showSnackBar(
                     //     const SnackBar(

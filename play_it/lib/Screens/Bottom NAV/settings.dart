@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:play_it/Screens/homePage.dart';
+import 'package:play_it/Screens/setinngs/accountSettings.dart';
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -260,7 +262,12 @@ class _SettingsState extends State<Settings> {
                           ),
                         ),
                         child: ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                           Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AccountSettings()));
+                          },
                           label: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
