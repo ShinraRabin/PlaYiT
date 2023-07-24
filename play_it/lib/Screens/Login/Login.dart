@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:play_it/Screens/Login/Signup.dart';
 import 'package:play_it/Screens/layouts/layouts.dart';
+import 'package:play_it/Screens/subscription/subscription.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,12 +11,22 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
- final _formKey = GlobalKey<FormState>();
-  // final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  // final TextEditingController _confirmPasswordController =
-      // TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  bool _validateForm() {
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      return false;
+    }
+
+    final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
+    if (!emailRegex.hasMatch(emailController.text)) {
+      return false;
+    }
+
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
             IconButton(
               icon: Icon(Icons.close),
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => SignupScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SignupScreen()));
               },
               color: Colors.white70,
               iconSize: 30,
@@ -63,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 0, 10, 0),
                         child: TextFormField(
-                          controller: _emailController,
+                          controller: emailController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter your name';
@@ -96,12 +107,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: 60,
                       ),
-                     
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                         child: TextFormField(
-                          controller: _passwordController,
-                          validator: ( String? value) {
+                          controller: passwordController,
+                          validator: (String? value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter your Password';
                             }
@@ -125,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                 Color.fromARGB(255, 79, 162, 201),
+                                Color.fromARGB(255, 79, 162, 201),
                                 Color.fromARGB(255, 0, 23, 26),
                               ],
                               begin: Alignment
@@ -136,10 +146,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           child: ElevatedButton.icon(
                             onPressed: () {
-                              Navigator.push(
+                              //  if (_validateForm()) {
+                      Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Layout()));
+                                      builder: (context) => Subscription()));
+                    // } else {
+                    //   ScaffoldMessenger.of(context).showSnackBar(
+                    //     const SnackBar(
+                    //         content:
+                    //             Text('Please fill all the fields correctly.')),
+                    //   );
+                    // }
                             },
                             label: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -211,13 +229,24 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("Don't have a Account",style: TextStyle(color: Colors.white),),
-                        ElevatedButton(onPressed: (){
-                          Navigator.push(
-                         context, MaterialPageRoute(builder: (context) =>SignupScreen()));
-                        }, 
-                        child: Text("Sign Up", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                        style: ElevatedButton.styleFrom(
+                        Text(
+                          "Don't have a Account",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignupScreen()));
+                            },
+                            child: Text(
+                              "Sign Up",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            style: ElevatedButton.styleFrom(
                               primary: Colors.transparent,
                               elevation: 0,
                             ))

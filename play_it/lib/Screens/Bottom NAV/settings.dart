@@ -72,8 +72,8 @@ class _SettingsState extends State<Settings> {
                           borderRadius: BorderRadius.circular(10),
                           gradient: LinearGradient(
                             colors: [
-                              Color.fromARGB(255, 79, 162, 201),
-                              Color.fromARGB(255, 0, 23, 26),
+                               Color(0xFF4C6B6B),
+                              Color(0xFF102222),
                             ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
@@ -116,8 +116,8 @@ class _SettingsState extends State<Settings> {
                           borderRadius: BorderRadius.circular(10),
                           gradient: LinearGradient(
                             colors: [
-                              Color.fromARGB(255, 79, 162, 201),
-                              Color.fromARGB(255, 0, 23, 26),
+                              Color(0xFF4C6B6B),
+                              Color(0xFF102222),
                             ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
@@ -154,8 +154,8 @@ class _SettingsState extends State<Settings> {
                           borderRadius: BorderRadius.circular(10),
                           gradient: LinearGradient(
                             colors: [
-                              Color.fromARGB(255, 79, 162, 201),
-                              Color.fromARGB(255, 0, 23, 26),
+                              Color(0xFF4C6B6B),
+                              Color(0xFF102222),
                             ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
@@ -252,8 +252,8 @@ class _SettingsState extends State<Settings> {
                           borderRadius: BorderRadius.circular(10),
                           gradient: LinearGradient(
                             colors: [
-                              Color.fromARGB(255, 79, 162, 201),
-                              Color.fromARGB(255, 0, 23, 26),
+                             Color(0xFF4C6B6B),
+                              Color(0xFF102222),
                             ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
@@ -306,8 +306,8 @@ class _SettingsState extends State<Settings> {
                           borderRadius: BorderRadius.circular(10),
                           gradient: LinearGradient(
                             colors: [
-                              Color.fromARGB(255, 79, 162, 201),
-                              Color.fromARGB(255, 0, 23, 26),
+                               Color(0xFF4C6B6B),
+                              Color(0xFF102222),
                             ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
@@ -350,8 +350,8 @@ class _SettingsState extends State<Settings> {
                           borderRadius: BorderRadius.circular(10),
                           gradient: LinearGradient(
                             colors: [
-                              Color.fromARGB(255, 79, 162, 201),
-                              Color.fromARGB(255, 0, 23, 26),
+                              Color(0xFF4C6B6B),
+                              Color(0xFF102222),
                             ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,

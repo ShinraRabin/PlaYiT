@@ -3,7 +3,7 @@ import 'package:play_it/Screens/Login/Login.dart';
 import 'package:play_it/Screens/home.dart';
 
 class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
   State<SignupScreen> createState() => _SignupScreenState();
@@ -11,11 +11,30 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+
+  bool _validateForm() {
+    if (nameController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        passwordController.text.isEmpty ||
+        confirmPasswordController.text.isEmpty) {
+      return false;
+    }
+
+   
+
+    final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
+    if (!emailRegex.hasMatch(emailController.text)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +55,7 @@ class _SignupScreenState extends State<SignupScreen> {
           ],
           backgroundColor: Color.fromARGB(255, 1, 98, 143),
         ),
-        backgroundColor:Color.fromARGB(255, 1, 98, 143),
+        backgroundColor: Color.fromARGB(255, 1, 98, 143),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(8.0),
@@ -63,13 +82,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 0, 10, 0),
                         child: TextFormField(
-                          controller: _nameController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your name';
-                            }
-                            return null;
-                          },
+                          controller: nameController,
+                          
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
@@ -99,13 +113,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                         child: TextFormField(
-                          controller: _emailController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your Email';
-                            }
-                            return null;
-                          },
+                          controller: emailController,
+                          
                           decoration: InputDecoration(
                             prefixIcon: Icon(
                               Icons.email_outlined,
@@ -123,13 +132,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                         child: TextFormField(
-                          controller: _passwordController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your Password';
-                            }
-                            return null;
-                          },
+                          controller: passwordController,
+                         
                           decoration: InputDecoration(
                             prefixIcon: Icon(
                               Icons.lock_clock_outlined,
@@ -147,13 +151,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                         child: TextFormField(
-                          controller: _confirmPasswordController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your Password';
-                            }
-                            return null;
-                          },
+                          controller: confirmPasswordController,
                           decoration: InputDecoration(
                             prefixIcon: Icon(
                               Icons.lock_clock_outlined,
@@ -163,6 +161,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             hintText: 'Confrim Password',
                             hintStyle: TextStyle(color: Colors.white70),
                           ),
+                          
                         ),
                       ),
                       SizedBox(height: 80),
@@ -172,7 +171,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                 Color.fromARGB(255, 79, 162, 201),
+                                Color.fromARGB(255, 79, 162, 201),
                                 Color.fromARGB(255, 0, 23, 26),
                               ],
                               begin: Alignment
@@ -183,10 +182,19 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                           child: ElevatedButton.icon(
                             onPressed: () {
-                              Navigator.push(
+                                 if (_validateForm()) {
+                      Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => LoginScreen()));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content:
+                                Text('Please fill all the fields correctly.')),
+                      );
+                    }
+                             
                             },
                             label: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -258,13 +266,25 @@ class _SignupScreenState extends State<SignupScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("Already have account?",style: TextStyle(color: Colors.white),),
-                        ElevatedButton(onPressed: (){
-                          Navigator.push(
-                         context, MaterialPageRoute(builder: (context) =>LoginScreen()));
-                        }, 
-                        child: Text("Sign In", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                        style: ElevatedButton.styleFrom(
+                        Text(
+                          "Already have account?",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginScreen()));
+                             
+                            },
+                            child: Text(
+                              "Sign In",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            style: ElevatedButton.styleFrom(
                               primary: Colors.transparent,
                               elevation: 0,
                             ))
