@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:play_it/Screens/Login/Signup.dart';
-import 'package:play_it/Screens/homePage.dart';
 import 'package:play_it/Screens/layouts/layouts.dart';
-import 'package:play_it/Screens/subscription/subscription.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -151,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => HomePage()));
+                                      builder: (context) => Layout()));
                     // } else {
                     //   ScaffoldMessenger.of(context).showSnackBar(
                     //     const SnackBar(
