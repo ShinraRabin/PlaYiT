@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:play_it/Screens/homePage.dart';
+// import 'package:play_it/Screens/homePage.dart';
 import 'package:play_it/Screens/setinngs/accountSettings.dart';
 
 class Settings extends StatefulWidget {

@@ -1,4 +1,7 @@
+// Importing necessary packages
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:play_it/Screens/Login/Login.dart';
 import 'package:play_it/Screens/home.dart';
 
@@ -10,12 +13,17 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  // Global key to uniquely identify the Form widget
   final _formKey = GlobalKey<FormState>();
+
+  // TextEditingController for handling user input
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
+  // Form validation
   bool _validateForm() {
     if (nameController.text.isEmpty ||
         emailController.text.isEmpty ||
@@ -24,8 +32,6 @@ class _SignupScreenState extends State<SignupScreen> {
       return false;
     }
 
-   
-
     final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
     if (!emailRegex.hasMatch(emailController.text)) {
       return false;
@@ -33,8 +39,6 @@ class _SignupScreenState extends State<SignupScreen> {
 
     return true;
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +51,9 @@ class _SignupScreenState extends State<SignupScreen> {
               icon: Icon(Icons.close),
               onPressed: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Home()));
+                  context,
+                  MaterialPageRoute(builder: (context) => Home()),
+                );
               },
               color: Colors.white70,
               iconSize: 30,
@@ -66,9 +72,10 @@ class _SignupScreenState extends State<SignupScreen> {
                   child: Text(
                     "CREATE ACCOUNT",
                     style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -79,11 +86,11 @@ class _SignupScreenState extends State<SignupScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      // TextFormField for Name
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 0, 10, 0),
                         child: TextFormField(
                           controller: nameController,
-                          
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
@@ -98,11 +105,11 @@ class _SignupScreenState extends State<SignupScreen> {
                               borderSide: BorderSide(color: Colors.blue),
                             ),
                             contentPadding: EdgeInsets.symmetric(
-                                vertical: 20.0,
-                                horizontal: 16.0), // Adjust the padding
+                                vertical: 20.0, horizontal: 16.0),
+                            // Adjust the padding
                             floatingLabelBehavior: FloatingLabelBehavior.never,
-                            errorStyle: TextStyle(
-                                color: Colors.red), // Set error text color
+                            errorStyle: TextStyle(color: Colors.red),
+                            // Set error text color
                             hintText: 'Full Name',
                           ),
                         ),
@@ -110,17 +117,13 @@ class _SignupScreenState extends State<SignupScreen> {
                       SizedBox(
                         height: 60,
                       ),
+                      // TextFormField for Email
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                         child: TextFormField(
                           controller: emailController,
-                          
                           decoration: InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.email_outlined,
-                            ),
-
-                            // Set error text color
+                            prefixIcon: Icon(Icons.email_outlined),
                             hintText: 'Email',
                             hintStyle: TextStyle(color: Colors.white70),
                           ),
@@ -129,17 +132,13 @@ class _SignupScreenState extends State<SignupScreen> {
                       SizedBox(
                         height: 60,
                       ),
+                      // TextFormField for Password
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                         child: TextFormField(
                           controller: passwordController,
-                         
                           decoration: InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.lock_clock_outlined,
-                            ),
-
-                            // Set error text color
+                            prefixIcon: Icon(Icons.lock_clock_outlined),
                             hintText: 'Password',
                             hintStyle: TextStyle(color: Colors.white70),
                           ),
@@ -148,23 +147,20 @@ class _SignupScreenState extends State<SignupScreen> {
                       SizedBox(
                         height: 60,
                       ),
+                      // TextFormField for Confirm Password
                       Padding(
                         padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                         child: TextFormField(
                           controller: confirmPasswordController,
                           decoration: InputDecoration(
-                            prefixIcon: Icon(
-                              Icons.lock_clock_outlined,
-                            ),
-
-                            // Set error text color
-                            hintText: 'Confrim Password',
+                            prefixIcon: Icon(Icons.lock_clock_outlined),
+                            hintText: 'Confirm Password',
                             hintStyle: TextStyle(color: Colors.white70),
                           ),
-                          
                         ),
                       ),
                       SizedBox(height: 80),
+                      // ElevatedButton for SignUp
                       Padding(
                         padding: const EdgeInsets.fromLTRB(230, 0, 10, 0),
                         child: Container(
@@ -174,27 +170,25 @@ class _SignupScreenState extends State<SignupScreen> {
                                 Color.fromARGB(255, 79, 162, 201),
                                 Color.fromARGB(255, 0, 23, 26),
                               ],
-                              begin: Alignment
-                                  .centerLeft, // Alignment of the gradient starting point
+                              begin: Alignment.centerLeft,
+                              // Alignment of the gradient starting point
                               end: Alignment.centerRight,
                             ),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: ElevatedButton.icon(
                             onPressed: () {
-                                 if (_validateForm()) {
-                      Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginScreen()));
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content:
-                                Text('Please fill all the fields correctly.')),
-                      );
-                    }
-                             
+                              if (_validateForm()) {
+                                // Call the RegisterUser function when the button is pressed
+                                RegisterUser();
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        'Please fill all the fields correctly.'),
+                                  ),
+                                );
+                              }
                             },
                             label: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -223,12 +217,12 @@ class _SignupScreenState extends State<SignupScreen> {
                 SizedBox(
                   height: 50,
                 ),
+                // Container and ElevatedButton for "Signup with Google"
                 Container(
-                  width: 300, // Adjust the width as per your requirement
-                  height: 45, // Adjust the height as per your requirement
+                  width: 300,
+                  height: 45,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                        20, 0, 0, 10), // Adjust the padding as needed
+                    padding: const EdgeInsets.fromLTRB(20, 0, 0, 10),
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -242,9 +236,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             child: Image.network(
                                 'http://pngimg.com/uploads/google/google_PNG19635.png'),
                           ),
-                          SizedBox(
-                              width:
-                                  50.0), // Add some space between the icon and text
+                          SizedBox(width: 50.0),
+                          // Add some space between the icon and text
                           Text(
                             "Signup with Google",
                             style: TextStyle(
@@ -257,6 +250,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                 ),
+                // Container, ElevatedButton, and Text for "Already have an account?"
                 Container(
                   width: 400,
                   height: 40,
@@ -267,27 +261,29 @@ class _SignupScreenState extends State<SignupScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "Already have account?",
+                          "Already have an account?",
                           style: TextStyle(color: Colors.white),
                         ),
                         ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginScreen()));
-                             
-                            },
-                            child: Text(
-                              "Sign In",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginScreen()),
+                            );
+                          },
+                          child: Text(
+                            "Sign In",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.transparent,
-                              elevation: 0,
-                            ))
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.transparent,
+                            elevation: 0,
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -298,5 +294,54 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
+  }
+
+  // Function for storing data in the database of users
+  Future<void> RegisterUser() async {
+    if (_formKey.currentState!.validate()) {
+      // Getting the values from the text controllers
+      final username = nameController.text;
+      final email = emailController.text;
+      final password = passwordController.text;
+      final body = {
+        "username": username,
+        "email": email,
+        "password": password,
+      };
+      const url = 'http://localhost:3000/register';
+      final uri = Uri.parse(url);
+
+      final response = await http.post(
+        uri,
+        body: jsonEncode(body),
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      if (response.statusCode == 201) {
+        nameController.text = '';
+        emailController.text = '';
+        passwordController.text = '';
+        print("Creation Success");
+        // Navigate to LoginScreen after successful registration
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreen()),
+        );
+      } else {
+        showSuccessMessage('Creation Failed');
+      }
+    }
+  }
+
+  // Function to show a success message in a SnackBar
+  void showSuccessMessage(String message) {
+    final snackBar = SnackBar(
+      content: Text(
+        message,
+        style: TextStyle(color: Colors.white),
+      ),
+      backgroundColor: Colors.blueAccent,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
