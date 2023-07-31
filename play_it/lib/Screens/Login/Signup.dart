@@ -31,6 +31,9 @@ class _SignupScreenState extends State<SignupScreen> {
         confirmPasswordController.text.isEmpty) {
       return false;
     }
+    if (passwordController.text != confirmPasswordController.text) {
+      return false;
+    }
 
     final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
     if (!emailRegex.hasMatch(emailController.text)) {
@@ -39,6 +42,62 @@ class _SignupScreenState extends State<SignupScreen> {
 
     return true;
   }
+   static var  client = http.Client(); 
+  // Function to send the registration data to the API
+  void _registerUser() async {
+    
+    const String apiUrl = 'http://10.0.0.7:3000/register';
+
+    // Gather user registration data
+    String username = nameController.text;
+    String email = emailController.text;
+    String password = passwordController.text;
+    String confirmpassword = confirmPasswordController.text;
+
+    
+
+    try {
+      // Send a POST request to the API
+      final response = await http.post(Uri.parse(apiUrl),
+        
+          body: {
+            "username": username,
+            "email": email,
+            "password":password,
+            "confirmpassword":confirmpassword,
+          });
+
+      if (response.statusCode == 201 || response.statusCode == 200) {
+         ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Sucessfullyregister: "),
+          ),
+        );
+        // Registration successful, navigate to login screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreen()),
+        );
+      } else {
+        print("erroe: ${response.statusCode}");
+        // Registration failed, show an error message
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Failed to register: "),
+          ),
+        );
+      }
+    } catch (e) {
+      // Error occurred while making the request
+      print('error is $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error connecting to the server. Please try again.'),
+        ),
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -179,8 +238,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           child: ElevatedButton.icon(
                             onPressed: () {
                               if (_validateForm()) {
-                                // Call the RegisterUser function when the button is pressed
-                                RegisterUser();
+                                _registerUser();
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
@@ -294,54 +352,5 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
-  }
-
-  // Function for storing data in the database of users
-  Future<void> RegisterUser() async {
-    if (_formKey.currentState!.validate()) {
-      // Getting the values from the text controllers
-      final username = nameController.text;
-      final email = emailController.text;
-      final password = passwordController.text;
-      final body = {
-        "username": username,
-        "email": email,
-        "password": password,
-      };
-      const url = 'http://localhost:3000/register';
-      final uri = Uri.parse(url);
-
-      final response = await http.post(
-        uri,
-        body: jsonEncode(body),
-        headers: {'Content-Type': 'application/json'},
-      );
-
-      if (response.statusCode == 201) {
-        nameController.text = '';
-        emailController.text = '';
-        passwordController.text = '';
-        print("Creation Success");
-        // Navigate to LoginScreen after successful registration
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LoginScreen()),
-        );
-      } else {
-        showSuccessMessage('Creation Failed');
-      }
-    }
-  }
-
-  // Function to show a success message in a SnackBar
-  void showSuccessMessage(String message) {
-    final snackBar = SnackBar(
-      content: Text(
-        message,
-        style: TextStyle(color: Colors.white),
-      ),
-      backgroundColor: Colors.blueAccent,
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
