@@ -1,3 +1,9 @@
+import 'dart:convert';
+
+
+
+LoginResponseModel loginResponseJson(String str) =>
+  LoginResponseModel.fromJson(json.decode(str));
 class LoginResponseModel {
   late final User user;
 

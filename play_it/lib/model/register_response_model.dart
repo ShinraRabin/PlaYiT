@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:play_it/model/login_response_model.dart';
 
-LoginResponseModel loginResponseModel(String str) =>
-  LoginResponseModel.fromJson(json.decode(str));
+RegisterResponseModel registerResponseModel(String str) =>
+  RegisterResponseModel.fromJson(json.decode(str));
 
 class RegisterResponseModel {
   late final User user;

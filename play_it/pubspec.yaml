@@ -33,6 +33,9 @@ dependencies:
   flutter_statusbarcolor_ns: ^0.5.0
   animated_text_kit: ^4.2.2
   http: ^1.1.0
+  api_cache_manager: ^1.0.1
+  modal_progress_hud_nsn: ^0.4.0
+  flutter_progress_hud: ^2.0.2
   
 
 
