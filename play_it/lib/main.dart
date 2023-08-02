@@ -3,6 +3,7 @@ import 'package:play_it/Screens/Login/Login.dart';
 import 'package:play_it/Screens/Login/Signup.dart';
 
 import 'package:play_it/Screens/home.dart';
+import 'package:play_it/Screens/layouts/layouts.dart';
 // import 'package:play_it/Screens/homePage.dart';
 
 void main() {
@@ -20,7 +21,10 @@ class MyApp extends StatelessWidget {
      routes: { 
         '/': (context) => LoginScreen() , 
         '/home': (context) => Home() , 
+        '/layout': (context) => Layout() , 
         '/register': (context) => SignupScreen(),
+        '/login': (context) => LoginScreen() , 
+
         
 
       },

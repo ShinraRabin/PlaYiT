@@ -10,14 +10,14 @@ class RegisterResponseModel {
   RegisterResponseModel({required this.user});
 
   RegisterResponseModel.fromJson(Map<String, dynamic> json) {
-    user = (json['User'] != null ? new User.fromJson(json['User']) : null)!;
+    user = (json['User'] != null ? User.fromJson(json['User']) : null)!;
   }
 
+  get data => null;
+
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.user != null) {
-      data['User'] = this.user.toJson();
-    }
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['User'] = user.toJson();
     return data;
   }
 }
@@ -38,7 +38,7 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['username'] = this.username;
     data['email'] = this.email;
     data['role'] = this.role;
