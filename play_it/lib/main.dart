@@ -18,16 +18,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-     routes: { 
-        '/': (context) => LoginScreen() , 
-        '/home': (context) => Home() , 
-        '/layout': (context) => Layout() , 
-        '/register': (context) => SignupScreen(),
-        '/login': (context) => LoginScreen() , 
+    //  routes: { 
+    //     '/': (context) => LoginScreen() , 
+    //     '/home': (context) => Home() , 
+    //     '/layout': (context) => Layout() , 
+    //     '/register': (context) => SignupScreen(),
+    //     '/login': (context) => LoginScreen() , 
 
         
 
-      },
+    //   },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.deepPurple,
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // ignore: prefer_const_constructors
-      // home:Home(),
+      home:Home(),
     );
   }
 }
